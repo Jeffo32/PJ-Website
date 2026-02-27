@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>PJ Aristorenas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preload" href="images/logos.png" as="image">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -16,7 +17,7 @@
 .surface-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3;text-align:center;padding:1.5rem;transform:translateY(-8vh);}
 .surface-text .st-sub{font-family:var(--fn);font-size:0.65rem;font-weight:300;letter-spacing:0.35em;text-transform:uppercase;color:rgba(255,255,255,0.8);margin-bottom:1rem;}
 .surface-text .st-name{font-family:var(--fs);font-size:clamp(2.2rem,8vw,5rem);font-weight:300;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,0.4);}.surface-text .st-name em{font-style:italic;color:#fff;}
-.surface-dive{position:fixed;bottom:3rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:0.5rem;}
+.surface-dive{position:absolute;top:calc(100vh - 5rem);top:calc(100dvh - 5rem);left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:0.5rem;pointer-events:none;}
 .surface-dive span{font-family:var(--fn);font-size:0.6rem;font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.6);}
 .surface-dive .dive-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,0.5),transparent);animation:dln 2s ease-in-out infinite;}
 @keyframes dln{0%,100%{transform:scaleY(0.4);opacity:0.3;}50%{transform:scaleY(1);opacity:0.8;}}
@@ -238,7 +239,7 @@ txi.forEach(function(card){var r=card.getBoundingClientRect();if(r.bottom<-100||
 var lsy=window.scrollY,bt=0,tk=false;
 
 var surfEl=document.getElementById('surface');
-function onScroll(){var sy=window.scrollY,dh=document.documentElement.scrollHeight-window.innerHeight,sf=dh>0?sy/dh:0;og.style.transform="translateY("+-sy+"px)";var fade=Math.max(0,1-sf*5);ca.style.opacity=fade*0.07;var sp=Math.min(1,sy/window.innerHeight);surfEl.style.filter='blur('+sp*20+'px)';var maskBot=Math.max(0,100-sp*100);var maskTop=Math.max(0,maskBot-50);surfEl.style.webkitMaskImage='linear-gradient(to bottom, black '+maskTop+'%, transparent '+maskBot+'%)';surfEl.style.maskImage='linear-gradient(to bottom, black '+maskTop+'%, transparent '+maskBot+'%)';var diveEl=document.querySelector('.surface-dive');if(diveEl)diveEl.style.opacity=Math.max(0,1-sp*4);var rayIn=Math.max(0,Math.min(1,(sy-window.innerHeight*0.45)/(window.innerHeight*0.3)));var rayOut=Math.max(0,1-(sy-window.innerHeight*1.6)/(window.innerHeight*0.4));r1.style.opacity=Math.min(rayIn,rayOut);if(sf>0.05){di.classList.add("vis");df.style.height=(sf*100)+"%";}else{di.classList.remove("vis");}upPx();var delta=sy-lsy;if(delta>5){var now=Date.now();if(now-bt>350){bt=now;burst(tx,ty,Math.min(Math.max(Math.floor(delta/20),2),3));}}lsy=sy;tk=false;}
+function onScroll(){var sy=window.scrollY,dh=document.documentElement.scrollHeight-window.innerHeight,sf=dh>0?sy/dh:0;og.style.transform="translateY("+-sy+"px)";var fade=Math.max(0,1-sf*5);ca.style.opacity=fade*0.07;var sp=Math.min(1,sy/window.innerHeight);surfEl.style.filter='blur('+sp*20+'px)';var maskBot=Math.max(0,100-sp*100);var maskTop=Math.max(0,maskBot-50);surfEl.style.webkitMaskImage='linear-gradient(to bottom, black '+maskTop+'%, transparent '+maskBot+'%)';surfEl.style.maskImage='linear-gradient(to bottom, black '+maskTop+'%, transparent '+maskBot+'%)';var diveEl=document.querySelector('.surface-dive');if(diveEl){diveEl.style.opacity=Math.max(0,1-sp*4);diveEl.style.filter='blur('+sp*20+'px)';}var rayIn=Math.max(0,Math.min(1,(sy-window.innerHeight*0.45)/(window.innerHeight*0.3)));var rayOut=Math.max(0,1-(sy-window.innerHeight*1.6)/(window.innerHeight*0.4));r1.style.opacity=Math.min(rayIn,rayOut);if(sf>0.05){di.classList.add("vis");df.style.height=(sf*100)+"%";}else{di.classList.remove("vis");}upPx();var delta=sy-lsy;if(delta>5){var now=Date.now();if(now-bt>350){bt=now;burst(tx,ty,Math.min(Math.max(Math.floor(delta/20),2),3));}}lsy=sy;tk=false;}
 window.addEventListener("scroll",function(){if(!tk){requestAnimationFrame(onScroll);tk=true;}},{passive:true});
 if(window.matchMedia("(pointer:fine)").matches){document.addEventListener("click",function(e){var r=document.createElement("div");r.style.cssText="position:fixed;border-radius:50%;border:1px solid rgba(20,184,166,0.4);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);left:"+e.clientX+"px;top:"+e.clientY+"px;width:0;height:0;opacity:1;transition:all 0.6s ease-out;";document.body.appendChild(r);requestAnimationFrame(function(){r.style.width="60px";r.style.height="60px";r.style.opacity="0";});setTimeout(function(){r.remove();},700);});}
 onScroll();
