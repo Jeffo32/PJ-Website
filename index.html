@@ -3,9 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="mobile-web-app-capable" content="yes">
 <title>PJ Aristorenas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,10 +51,6 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;background:var(--dk);overflow-x:hidden;min-height:100vh;min-height:100dvh;}
 body{font-family:var(--fn);color:var(--pl);overflow-x:hidden;-webkit-font-smoothing:antialiased;background:var(--dk);max-width:100vw;min-height:100vh;min-height:100dvh;}
-.fsbtn{position:absolute;top:22%;left:50%;transform:translateX(-50%);z-index:4;display:flex;align-items:center;gap:0.5rem;padding:0.55rem 1.4rem;border-radius:40px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;color:rgba(255,255,255,0.7);transition:all 0.4s var(--es);}
-.fsbtn:hover{background:rgba(255,255,255,0.14);border-color:rgba(255,255,255,0.3);color:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
-.fsbtn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.fsbtn span{font-family:var(--fn);font-size:0.6rem;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;}
 @keyframes fsFadeIn{to{opacity:1;}}
 .obg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
 .ogr{position:absolute;left:0;right:0;top:0;will-change:transform;
@@ -155,8 +148,8 @@ section{position:relative;z-index:3;}
 <div class="di" id="di"><div class="dl"><div class="dfl" id="df"></div></div><span class="dlb">Depth</span></div>
 <section class="surface" id="surface">
 <video id="surfvid" autoplay muted loop playsinline poster="images/video-poster.jpg" src="water_loop.mp4"></video>
-<div class="surface-fade"></div><button class="fsbtn" id="fsBtn" aria-label="Toggle fullscreen"><svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg><span>Full Screen</span></button><div class="surface-text"><p class="st-sub">Underwater Photographer</p><h1 class="st-name">PJ <em>Aristorenas</em></h1></div>
-<div class="surface-dive"><span>Dive In</span><div class="dive-line"></div></div>
+<div class="surface-fade"></div><div class="surface-text"><p class="st-sub">Underwater Photographer</p><h1 class="st-name">PJ <em>Aristorenas</em></h1></div>
+<div class="surface-dive"><span>Scroll</span><div class="dive-line"></div></div>
 </section>
 <section class="pt" id="portfolio"><div class="pth rv"><p class="sl">Selected Work</p><h2 class="sh">Into the Blue</h2></div><div class="pg">
 <div class="pi" data-px><img decoding="async" src="images/turtle.jpg" alt="Green Sea Turtle"><div class="pio"><p class="pic">Marine Life</p><h3 class="pit">Ancient Guardian</h3><p class="pil">Malapascua, Philippines — 2024</p></div></div>
@@ -374,24 +367,4 @@ setTimeout(function(){lbImg.style.transition='';},400);
 e.preventDefault();
 }else{lbTapT=now;lbTapX=x;lbTapY=y;}
 },{passive:false});
-var fsb=document.getElementById('fsBtn');
-var fsExpand='<svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg><span>Full Screen</span>';
-var fsCompress='<svg viewBox="0 0 24 24"><path d="M4 14h6v6m10-10h-6V4m0 6l7-7M3 21l7-7"/></svg><span>Exit</span>';
-var canFS=!!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen);
-var isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&'ontouchend' in document);
-function isFS(){return !!(document.fullscreenElement||document.webkitFullscreenElement);}
-function enterFS(){var d=document.documentElement;if(d.requestFullscreen)d.requestFullscreen();else if(d.webkitRequestFullscreen)d.webkitRequestFullscreen();}
-function exitFS(){if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();}
-function updateFSBtn(){if(isFS()){fsb.innerHTML=fsCompress;}else{fsb.innerHTML=fsExpand;}}
-fsb.addEventListener('click',function(e){
-e.preventDefault();e.stopPropagation();
-if(canFS&&!isIOS){
-if(isFS()){exitFS();}else{enterFS();}
-}else{
-window.scrollTo({top:1,behavior:'instant'});
-setTimeout(function(){window.scrollTo({top:0,behavior:'smooth'});},100);
-}
-});
-document.addEventListener('fullscreenchange',updateFSBtn);
-document.addEventListener('webkitfullscreenchange',updateFSBtn);
 </script></body></html>
