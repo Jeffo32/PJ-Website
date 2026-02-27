@@ -28,8 +28,8 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
 .lmq::before,.lmq::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
 .lmq::before{left:0;background:linear-gradient(to right,var(--dk),transparent);}
 .lmq::after{right:0;background:linear-gradient(to left,var(--dk),transparent);}
-.lmt{display:flex;width:max-content;animation:lmscroll 30s linear infinite;}
-.lmt img{height:80px;flex-shrink:0;}
+.lmt{display:flex;gap:0;width:max-content;animation:lmscroll 30s linear infinite;will-change:transform;}
+.lmt img{height:80px;flex-shrink:0;display:block;}
 .adv{padding:4rem 1.5rem;display:flex;justify-content:center;}
 .advc{position:relative;border-radius:16px;overflow:hidden;max-width:700px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,0.4);animation:fi 5s ease-in-out infinite;}
 .advc video{display:block;width:100%;height:auto;}
@@ -149,8 +149,8 @@ section{position:relative;z-index:3;}
 <section class="surface" id="surface">
 <video id="surfvid" autoplay muted loop playsinline poster="images/video-poster.jpg" src="water_loop.mp4"></video>
 <div class="surface-fade"></div><div class="surface-text"><p class="st-sub">Underwater Photographer</p><h1 class="st-name">PJ <em>Aristorenas</em></h1></div>
-<div class="surface-dive"><span>Scroll</span><div class="dive-line"></div></div>
 </section>
+<div class="surface-dive"><span>Scroll</span><div class="dive-line"></div></div>
 <section class="pt" id="portfolio"><div class="pth rv"><p class="sl">Selected Work</p><h2 class="sh">Into the Blue</h2></div><div class="pg">
 <div class="pi" data-px><img decoding="async" src="images/turtle.jpg" alt="Green Sea Turtle"><div class="pio"><p class="pic">Marine Life</p><h3 class="pit">Ancient Guardian</h3><p class="pil">Malapascua, Philippines — 2024</p></div></div>
 <div class="pi" data-px><img decoding="async" src="images/baby-fish.jpg" alt="Baby Fish"><div class="pio"><p class="pic">Macro Life</p><h3 class="pit">New Beginnings</h3><p class="pil">Anilao, Philippines — 2024</p></div></div>
