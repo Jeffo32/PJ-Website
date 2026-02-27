@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
 <title>PJ Aristorenas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -374,11 +377,21 @@ e.preventDefault();
 var fsb=document.getElementById('fsBtn');
 var fsExpand='<svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg><span>Full Screen</span>';
 var fsCompress='<svg viewBox="0 0 24 24"><path d="M4 14h6v6m10-10h-6V4m0 6l7-7M3 21l7-7"/></svg><span>Exit</span>';
-function isFS(){return !!(document.fullscreenElement||document.webkitFullscreenElement||document.mozFullScreenElement||document.msFullscreenElement);}
-function enterFS(){var d=document.documentElement;if(d.requestFullscreen)d.requestFullscreen();else if(d.webkitRequestFullscreen)d.webkitRequestFullscreen();else if(d.mozRequestFullScreen)d.mozRequestFullScreen();else if(d.msRequestFullscreen)d.msRequestFullscreen();}
-function exitFS(){if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();else if(document.mozCancelFullScreen)document.mozCancelFullScreen();else if(document.msExitFullscreen)document.msExitFullscreen();}
+var canFS=!!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen);
+var isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&'ontouchend' in document);
+function isFS(){return !!(document.fullscreenElement||document.webkitFullscreenElement);}
+function enterFS(){var d=document.documentElement;if(d.requestFullscreen)d.requestFullscreen();else if(d.webkitRequestFullscreen)d.webkitRequestFullscreen();}
+function exitFS(){if(document.exitFullscreen)document.exitFullscreen();else if(document.webkitExitFullscreen)document.webkitExitFullscreen();}
 function updateFSBtn(){if(isFS()){fsb.innerHTML=fsCompress;}else{fsb.innerHTML=fsExpand;}}
-fsb.addEventListener('click',function(){if(isFS()){exitFS();}else{enterFS();}});
+fsb.addEventListener('click',function(e){
+e.preventDefault();e.stopPropagation();
+if(canFS&&!isIOS){
+if(isFS()){exitFS();}else{enterFS();}
+}else{
+window.scrollTo({top:1,behavior:'instant'});
+setTimeout(function(){window.scrollTo({top:0,behavior:'smooth'});},100);
+}
+});
 document.addEventListener('fullscreenchange',updateFSBtn);
 document.addEventListener('webkitfullscreenchange',updateFSBtn);
 </script></body></html>
